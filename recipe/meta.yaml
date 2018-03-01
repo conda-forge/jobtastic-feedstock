@@ -1,7 +1,7 @@
 {% set name = "jobtastic" %}
-{% set version = "0.3.1" %}
+{% set version = "1.0.0a2" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "da49cd83756d6899f2f7b57b1c65b3e3c2a5c3ce7b9fc296aab9ebaa10ec83cc" %}
+{% set hash_val = "3f55e7d76f6dac6e5af115ec77232e00859218437cdc5efd970e9dde1ca035bc" %}
 
 package:
   name: {{ name|lower }}
