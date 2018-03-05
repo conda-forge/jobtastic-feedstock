@@ -25,7 +25,7 @@ requirements:
   run:
     - python
     - psutil >=3.0,<4
-    - celery >=2.5,<4
+    - celery >=3.1,<4
 
 test:
   imports:
