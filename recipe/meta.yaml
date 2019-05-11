@@ -1,7 +1,7 @@
 {% set name = "jobtastic" %}
-{% set version = "1.0.0a2" %}
+{% set version = "2.1.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "3f55e7d76f6dac6e5af115ec77232e00859218437cdc5efd970e9dde1ca035bc" %}
+{% set hash_val = "74ec5789d889b10909066da99a225d97b667143f0e7060fbadbc69117a2a4a8e" %}
 
 package:
   name: {{ name|lower }}
@@ -13,19 +13,20 @@ source:
   {{hash_type}}: {{ hash_val }}
 
 build:
-  skip: true  # [not py27]
-  number: 1000
-  script: python setup.py install --single-version-externally-managed --record record.txt
-
+  skip: true
+  number: 0
+  script: 
+    - script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+    
 requirements:
   build:
     - python
-    - setuptools
+    - pip
  
   run:
     - python
     - psutil >=3.0,<4
-    - celery >=3.1,<4
+    - celery >=3.1,<5
 
 test:
   imports:
