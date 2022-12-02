@@ -1,57 +1,49 @@
 {% set name = "jobtastic" %}
 {% set version = "2.1.1" %}
-{% set hash_type = "sha256" %}
-{% set hash_val = "74ec5789d889b10909066da99a225d97b667143f0e7060fbadbc69117a2a4a8e" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/PolicyStat/{{ name }}/archive/v{{ version }}.tar.gz
-  {{hash_type}}: {{ hash_val }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/jobtastic-{{ version }}.tar.gz
+  sha256: 25b98692183a9254ede363129bbe89d505b7396badd87a5c0a5ba338512aade1
 
 build:
-  skip: true
-  number: 0
-  script: 
-    - script: "{{ PYTHON }} -m pip install . --no-deps -vv"
-    
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 1
+
 requirements:
-  build:
-    - python
+  host:
+    - python >=2.6
+    - django
     - pip
- 
   run:
-    - python
-    - psutil >=3.0,<4
+    - python >=2.6
+    - psutil
     - celery >=3.1,<5
 
 test:
   imports:
     - jobtastic
-
+  commands:
+    - pip check
   requires:
-    - django >=1.4,<2
-    - django-celery >=3.0,<4
-    - django-nose
-    - mock
-    - unittest2  # [py26]
+    - pip
 
 about:
   home: http://policystat.github.com/jobtastic
-  license: MIT 
+  summary: Make your user-facing Celery jobs totally awesomer
+  license: MIT
   license_file: LICENSE
-  summary: 'Make your user-facing Celery jobs totally awesomer'
-
   description: |
-    Jobtastic makes your user-responsive long-running Celery jobs totally awesomer. 
-    Celery is the ubiquitous python job queueing tool and jobtastic is a python 
+    Jobtastic makes your user-responsive long-running Celery jobs totally awesomer.
+    Celery is the ubiquitous python job queueing tool and jobtastic is a python
     library that adds useful features to your Celery tasks. Specifically, these are
-    features you probably want if the results of your jobs are expensive or if your 
+    features you probably want if the results of your jobs are expensive or if your
     users need to wait while they compute their results.
-  dev_url: http://policystat.github.com/jobtastic
+  dev_url: https://github.com/PolicyStat/jobtastic
 
 extra:
   recipe-maintainers:
